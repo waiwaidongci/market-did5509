@@ -18,5 +18,9 @@ export const workspace = {
   deliveries: () => call('/deliveries'),
   schedule: data => call('/schedules', data),
   disable: id => call(`/schedules/${id}/disable`, {}),
+  waitDays: market => call(`/wait/days${market ? `?market=${encodeURIComponent(market)}` : ''}`),
+  waitDay: id => call(`/wait/days/${id}`),
+  submitManifest: data => call('/wait/manifests', data),
+  submitShards: data => call('/wait/shards', data),
   download: (path, filename) => saveFile(path, session.token, filename),
 };

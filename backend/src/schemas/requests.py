@@ -28,3 +28,20 @@ class ScheduleRequest(RunRequest):
     recipient: str = Field(min_length=1, max_length=100)
     first_at: datetime
     repeat_daily: bool = False
+
+class ManifestRequest(Request):
+    market: str = Field(min_length=1, max_length=300)
+    date: str = Field(min_length=10, max_length=10)
+    batch_no: int
+    expected_shards: list[int] = Field(min_length=1, max_length=10_000)
+    total_trucks: int
+
+class ShardCount(Request):
+    shard_no: int
+    buckets: dict | list
+
+class ShardsRequest(Request):
+    market: str = Field(min_length=1, max_length=300)
+    date: str = Field(min_length=10, max_length=10)
+    batch_no: int
+    shards: list[ShardCount] = Field(min_length=1, max_length=10_000)
